@@ -1,4 +1,4 @@
-package Controller;
+package controllerr;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import Service.Student_Service;
 
 @RestController
 @Path(value="/api")
-public class Controller {
+public class StudentController {
 	
 	@Autowired
 	private Student_Service studentservice;
