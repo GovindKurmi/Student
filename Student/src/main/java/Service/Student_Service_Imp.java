@@ -12,10 +12,10 @@ import Model.Student;
 @Service
 @Transactional
 public class Student_Service_Imp implements Student_Service {
- 
+
 	@Autowired
 	private Student_DAO studentdao;
-	
+
 	@Override
 	public boolean saveStudent(Student student) {
 		return studentdao.saveStudent(student);

@@ -16,49 +16,48 @@ import Model.Student;
 import Service.Student_Service;
 
 @RestController
-@Path(value="/api")
+@Path(value = "/api")
 public class StudentController {
-	
+
 	@Autowired
 	private Student_Service studentservice;
-	
-    @POST
-    @Path("save-student")
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public boolean saveStudent(@RequestBody Student student) {
-		 return studentservice.saveStudent(student);
-		
-	}
-	
-    @POST
-    @Path("students-list")
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public List<Student> allstudents() {
-		 return studentservice.getStudents();
-	}
-	
-	
+
 	@POST
-    @Path("delete-student/{student_id}")
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public boolean deleteStudent(@PathVariable("student_id") int student_id,Student student) {
+	@Path("save-student")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public boolean saveStudent(@RequestBody Student student) {
+		return studentservice.saveStudent(student);
+
+	}
+
+	@POST
+	@Path("students-list")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public List<Student> allstudents() {
+		return studentservice.getStudents();
+	}
+
+	@POST
+	@Path("delete-student/{student_id}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public boolean deleteStudent(@PathVariable("student_id") int student_id, Student student) {
 		student.setStudent_id(student_id);
 		return studentservice.deleteStudent(student);
 	}
 
 	@POST
-    @Path("student/{student_id}")
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public List<Student> allstudentByID(@PathVariable("student_id") int student_id,Student student) {
-		 student.setStudent_id(student_id);
-		 return studentservice.getStudentByID(student);
-		
+	@Path("student/{student_id}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public List<Student> allstudentByID(@PathVariable("student_id") int student_id, Student student) {
+		student.setStudent_id(student_id);
+		return studentservice.getStudentByID(student);
+
 	}
-	
+
 	@POST
-    @Path("update-student/{student_id}")
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public boolean updateStudent(@RequestBody Student student,@PathVariable("student_id") int student_id) {
+	@Path("update-student/{student_id}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public boolean updateStudent(@RequestBody Student student, @PathVariable("student_id") int student_id) {
 		student.setStudent_id(student_id);
 		return studentservice.updateStudent(student);
 	}
