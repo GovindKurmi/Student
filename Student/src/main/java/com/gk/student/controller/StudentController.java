@@ -1,7 +1,9 @@
-package controllerr;
+package com.gk.student.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -12,8 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import Model.Student;
-import Service.Student_Service;
+import com.gk.student.model.Student;
+import com.gk.student.service.Student_Service;
 
 @RestController
 @Path(value = "/api")
@@ -24,8 +26,9 @@ public class StudentController {
 
 	@POST
 	@Path("save-student")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public boolean saveStudent(@RequestBody Student student) {
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Student saveStudent(@RequestBody Student student) {
 		return studentservice.saveStudent(student);
 
 	}
@@ -39,26 +42,26 @@ public class StudentController {
 
 	@POST
 	@Path("delete-student/{student_id}")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public boolean deleteStudent(@PathVariable("student_id") int student_id, Student student) {
-		student.setStudent_id(student_id);
-		return studentservice.deleteStudent(student);
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteStudent(@PathVariable("student_id") int student_id) {
+		studentservice.deleteStudent(student_id);
 	}
 
 	@POST
 	@Path("student/{student_id}")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public List<Student> allstudentByID(@PathVariable("student_id") int student_id, Student student) {
-		student.setStudent_id(student_id);
-		return studentservice.getStudentByID(student);
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Optional<Student> allstudentByID(@PathVariable("student_id") int student_id) {
+		return studentservice.getStudentByID(student_id);
 
 	}
 
 	@POST
-	@Path("update-student/{student_id}")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public boolean updateStudent(@RequestBody Student student, @PathVariable("student_id") int student_id) {
-		student.setStudent_id(student_id);
+	@Path("update-student")
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Student updateStudent(@RequestBody Student student) {
 		return studentservice.updateStudent(student);
 	}
 }

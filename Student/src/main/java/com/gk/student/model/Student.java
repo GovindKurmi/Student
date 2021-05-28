@@ -1,4 +1,4 @@
-package Model;
+package com.gk.student.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
