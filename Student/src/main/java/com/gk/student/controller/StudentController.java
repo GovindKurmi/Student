@@ -1,16 +1,19 @@
 package com.gk.student.controller;
 
 import java.util.List;
-import java.util.Optional;
 
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +28,7 @@ public class StudentController {
 	private Student_Service studentservice;
 
 	@POST
-	@Path("save-student")
+	@Path("savestudent")
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Student saveStudent(@RequestBody Student student) {
@@ -33,32 +36,33 @@ public class StudentController {
 
 	}
 
-	@POST
-	@Path("students-list")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public List<Student> allstudents() {
+	@GET
+	@Path("studentslist")
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<Student> studentslist() {
 		return studentservice.getStudents();
 	}
 
-	@POST
-	@Path("delete-student/{student_id}")
+	@DELETE
+	@Path("deletestudent/{studentid}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void deleteStudent(@PathVariable("student_id") int student_id) {
-		studentservice.deleteStudent(student_id);
+	public void deleteStudent(@PathParam(value = "studentid") int studentid) {
+		studentservice.deleteStudent(studentid);
 	}
 
 	@POST
-	@Path("student/{student_id}")
+	@Path("savestudentlist")
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Optional<Student> allstudentByID(@PathVariable("student_id") int student_id) {
-		return studentservice.getStudentByID(student_id);
+	public Iterable<Student> savestudentlist(@RequestBody List<Student> studentlist) {
+		return studentservice.savestudentlist(studentlist);
 
 	}
 
-	@POST
-	@Path("update-student")
+	@PUT
+	@Path("updatestudent")
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Student updateStudent(@RequestBody Student student) {

@@ -1,13 +1,13 @@
 package com.gk.student.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gk.student.dao.Student_DAO;
 import com.gk.student.model.Student;
+
 @Component
 public class Student_Service_Imp implements Student_Service {
 
@@ -30,8 +30,8 @@ public class Student_Service_Imp implements Student_Service {
 	}
 
 	@Override
-	public Optional<Student> getStudentByID(int student) {
-		return studentdao.findById(student);
+	public Iterable<Student> savestudentlist(List<Student> student) {
+		return studentdao.saveAll(student);
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package com.gk.student.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.gk.student.model.Student;
 
@@ -13,7 +12,7 @@ public interface Student_Service {
 
 	public void deleteStudent(int student);
 
-	public Optional<Student> getStudentByID(int student);
+	public Iterable<Student> savestudentlist(List<Student> student);
 
 	public Student updateStudent(Student student);
 }
